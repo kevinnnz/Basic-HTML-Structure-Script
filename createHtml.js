@@ -33,6 +33,7 @@ function writeFolderToSystem() {
     } catch (err) {
         if (err.code == 'EEXIST') {
             console.log(directoryName + " exists already");
+            failSafe();
         }
         console.log(err);
     }
@@ -71,4 +72,13 @@ function createFiles() {
     }); 
 
 }
+
+function failSafe() { 
+     rl.question("Enter Site Directory Name: ", (newDirectory) => {
+        directoryName = newDirectory;
+        writeFolderToSystem();
+        rl.close();
+    });
+}
+
 engine();
